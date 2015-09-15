@@ -1,13 +1,16 @@
 import Ember from 'ember';
 import RecognizerMixin from 'ember-gestures/mixins/recognizers';
 
-const { computed } = Ember;
+const { computed, inject } = Ember;
 
 export default Ember.Component.extend(RecognizerMixin, {
-  /* setup */
+  /* Setup */
   tagName: 'div',
   classNames: ['person'],
   recognizers: 'pan', // 'pan press tap',
+
+  /* Sevices */
+  ui: inject.service('ui'),
 
   /* Public */
   person: null,
@@ -29,6 +32,8 @@ export default Ember.Component.extend(RecognizerMixin, {
 
 
   panStart() {
+    this.get('ui').own(this.get('elementId'), this.close.bind(this));
+
     let style = window.getComputedStyle(this.$()[0]);
     let matrix = new WebKitCSSMatrix(style.webkitTransform);
     this.startX = matrix.m41;
@@ -39,10 +44,8 @@ export default Ember.Component.extend(RecognizerMixin, {
       this.lastX = this.startX;
     }
 
-    if (this.rafAnimate) {
-      window.cancelAnimationFrame(this.rafAnimate);
-      this.rafAnimate = null;
-    }
+    window.cancelAnimationFrame(this.rafAnimate);
+    this.rafAnimate = null;
   },
 
   panMove(e) {
@@ -60,23 +63,21 @@ export default Ember.Component.extend(RecognizerMixin, {
   },
 
   panEnd(e) {
-    this.startX = null;
-
     if (Math.abs(e.originalEvent.gesture.deltaX) >= this.get('clipPoint')) {
       this.toggleProperty('isOpen');
     }
 
-    if (this.rafMove) {
-      window.cancelAnimationFrame(this.rafMove);
-      this.rafMove = null;
-    }
+    window.cancelAnimationFrame(this.rafMove);
+    this.rafMove = null;
+
     if (!this.rafAnimate) {
       this.rafAnimate = window.requestAnimationFrame(this.animate.bind(this));
     }
   },
 
   click() {
-    alert("Hey " + this.get('person.name'));
+    console.log("Hey " + this.get('person.name'));
+    this.get('ui').run();
   },
 
   move() {
@@ -137,6 +138,26 @@ export default Ember.Component.extend(RecognizerMixin, {
     style += 'transform: translate3d(' + x + 'px,' + y + 'px,' + z + 'px); ';
 
     this.$()[0].style.cssText = style;
-  }
+  },
+
+
+  close() {
+    this.set('isOpen', false);
+
+    window.cancelAnimationFrame(this.rafMove);
+    this.rafMove = null;
+
+    if (!this.rafAnimate) {
+      this.rafAnimate = window.requestAnimationFrame(this.animate.bind(this));
+    }
+  },
+
+
+  willDestroyElement() {
+    window.cancelAnimationFrame(this.rafMove);
+    window.cancelAnimationFrame(this.rafAnimate);
+
+    this.get('ui').drop(this.get('elementId'));
+  },
 
 });
