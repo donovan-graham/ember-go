@@ -6,6 +6,7 @@ export default Ember.Service.extend({
   deactivateCallback: null,
 
   own(elementId, cb) {
+
     /*
       Take ownership as the active ui element,
       the previous ui element's callback will be triggered.
@@ -20,7 +21,7 @@ export default Ember.Service.extend({
     });
   },
 
-  drop(elementId) {
+  disown(elementId) {
     /*
       Drop ownership if the element is current ui element. Callback will not be triggered.
       Must implement this components willDestroyElement hook.
@@ -36,9 +37,9 @@ export default Ember.Service.extend({
     });
   },
 
-  run() {
+  play() {
     /*
-     Run callback and clear the the active ui element.
+     Play callback and clear the the active ui element.
     */
     if (this.get('deactivateCallback')) {
       this.get('deactivateCallback')();

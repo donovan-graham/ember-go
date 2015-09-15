@@ -77,7 +77,7 @@ export default Ember.Component.extend(RecognizerMixin, {
 
   click() {
     // some action
-    this.get('ui').run();
+    this.get('ui').play();
   },
 
   move() {
@@ -157,7 +157,7 @@ export default Ember.Component.extend(RecognizerMixin, {
     window.cancelAnimationFrame(this.rafMove);
     window.cancelAnimationFrame(this.rafAnimate);
 
-    this.get('ui').drop(this.get('elementId'));
+    this.get('ui').disown(this.get('elementId'));
   },
 
 });
