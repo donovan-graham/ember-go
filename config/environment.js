@@ -23,7 +23,7 @@ module.exports = function(environment) {
       // 'script-src': "'self' 'unsafe-eval' 'unsafe-inline' https://*.firebase.com https://*.firebaseio.com",
       // 'font-src': "'self'",
       // 'frame-src': "https://*.firebase.com https://*.firebaseio.com",
-      // 'connect-src': "'self' https://api.cloudinary.com res.cloudinary.com https://*.firebase.com https://*.firebaseio.com wss://*.firebaseio.com samewave-client-staging.herokuapp.com samewave-client-demo.herokuapp.com samewave-engine-production.herokuapp.com data:",
+      // 'connect-src': "'self' https://api.cloudinary.com res.cloudinary.com https://*.firebase.com https://*.firebaseio.com wss://*.firebaseio.com data:",
       // 'img-src': "'self' res.cloudinary.com api.cloudinary.com data:",
       'style-src': "'self' 'unsafe-inline'",
       // 'media-src': "'self'"

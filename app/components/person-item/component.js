@@ -76,7 +76,7 @@ export default Ember.Component.extend(RecognizerMixin, {
   },
 
   click() {
-    console.log("Hey " + this.get('person.name'));
+    // some action
     this.get('ui').run();
   },
 
