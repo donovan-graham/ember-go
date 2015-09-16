@@ -74,8 +74,8 @@ progress[value]::-webkit-progress-value {
   z-index: 400;
   opacity: 1;
 
-  transition: transform 200ms linear;
-  -webkit-transition: -webkit-transform 200ms linear;
+  transition: transform 80ms linear;
+  -webkit-transition: -webkit-transform 80ms linear;
 }
 
 .plus-button.is-hidden {
