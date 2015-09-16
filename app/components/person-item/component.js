@@ -19,11 +19,13 @@ export default Ember.Component.extend(RecognizerMixin, {
 
   /* Private */
   isOpen: false,
-  rafAnimate: null,
 
   clipPoint: computed('revealWidth', function() {
     return Math.floor(this.get('revealWidth') * 0.4);
   }),
+
+  rafMove: null,
+  rafAnimate: null,
 
   startX: 0,
   lastX: 0,
@@ -124,8 +126,8 @@ export default Ember.Component.extend(RecognizerMixin, {
     this.rafAnimate = null;
 
     let x = (this.get('isOpen')) ? -1 * this.get('revealWidth') : 0,
-        y = this.startY,
-        z = this.startZ,
+        y = this.startY || 0,
+        z = this.startZ || 0,
         animation = 'linear',
         duration = '80',
         style = '';
