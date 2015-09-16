@@ -7,29 +7,35 @@ export default Ember.Component.extend(RecognizerMixin, {
   /* Setup */
   tagName: 'div',
   classNames: ['person'],
-  recognizers: 'pan', // 'pan press tap',
+  recognizers: 'pan tap', // 'pan press tap',
 
   /* Sevices */
   ui: inject.service('ui'),
 
   /* Public */
   person: null,
-
   revealWidth: 200,
 
-  clipPoint: computed('revealWidth', function() {
-    return Math.floor(this.get('revealWidth') * 0.4);
-  }),
 
   /* Private */
   isOpen: false,
   rafAnimate: null,
+
+  clipPoint: computed('revealWidth', function() {
+    return Math.floor(this.get('revealWidth') * 0.4);
+  }),
 
   startX: 0,
   lastX: 0,
   startY: 0,
   startZ: 0,
 
+
+  /* Events */
+
+  tap() {
+    this.get('ui').play();
+  },
 
   panStart() {
     this.get('ui').own(this.get('elementId'), this.close.bind(this));
@@ -63,9 +69,7 @@ export default Ember.Component.extend(RecognizerMixin, {
   },
 
   panEnd(e) {
-    if (Math.abs(e.originalEvent.gesture.deltaX) >= this.get('clipPoint')) {
-      this.toggleProperty('isOpen');
-    }
+    this.set('isOpen', Math.abs(e.originalEvent.gesture.deltaX) >= this.get('clipPoint'));
 
     window.cancelAnimationFrame(this.rafMove);
     this.rafMove = null;
@@ -75,10 +79,11 @@ export default Ember.Component.extend(RecognizerMixin, {
     }
   },
 
-  click() {
-    // some action
-    this.get('ui').play();
-  },
+  // click() {
+  //   // Don't know if this is a GhostBuster issue, but it's being called after panEnd...
+  //   console.log('click');
+  //   return;
+  // },
 
   move() {
     this.rafMove = null;
@@ -119,6 +124,7 @@ export default Ember.Component.extend(RecognizerMixin, {
         duration = '80',
         style = '';
 
+
     // keep original inline style
     style += 'touch-action: pan-x;';
     style += '-webkit-user-select: none;';
@@ -152,6 +158,8 @@ export default Ember.Component.extend(RecognizerMixin, {
     }
   },
 
+
+  /* Clean up */
 
   willDestroyElement() {
     window.cancelAnimationFrame(this.rafMove);
