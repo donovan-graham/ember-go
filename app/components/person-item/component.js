@@ -69,7 +69,13 @@ export default Ember.Component.extend(RecognizerMixin, {
   },
 
   panEnd(e) {
-    this.set('isOpen', Math.abs(e.originalEvent.gesture.deltaX) >= this.get('clipPoint'));
+    if (Math.abs(e.originalEvent.gesture.deltaX) >= this.get('clipPoint')) {
+      this.toggleProperty('isOpen');
+    }
+
+    if (!this.get('isOpen')) {
+      this.get('ui').disown(this.get('elementId'));
+    }
 
     window.cancelAnimationFrame(this.rafMove);
     this.rafMove = null;
