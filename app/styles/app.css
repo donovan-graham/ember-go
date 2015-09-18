@@ -33,13 +33,65 @@ progress[value]::-webkit-progress-value {
 
 
 
-.person {
-  border: 3px solid #333;
+.list-item {
+  display: block;
+  position: relative;
+
+  /*
+  border: 1px solid #444;
+  border-right: none;
+  overflow: hidden;
+  */
+
+  margin-bottom: 5px;
+
+}
+
+.list-item .content {
+  position: relative;
+  z-index: 5;
+
+  box-sizing: border-box;
+
+  border: 2px solid #333;
+
+  /*
+  border: 1px solid #333;
+  border-right-width: 2px;
+  */
+
   background: #efefef;
   padding: 10px;
-  margin-bottom: 5px;
   tanslate: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0);
+}
+
+.list-item .options {
+  display: block;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+
+  border: 1px solid #333;
+  border-left: none;
+
+  /* border-right: 1px solid #333; */
+}
+
+.list-item .options div {
+  display: inline-block;
+  border-left: 1px solid #444;
+  width: 50px;
+  height: 100%;
+  text-align: center;
+}
+
+
+
+
+.person {
+
 }
 
 

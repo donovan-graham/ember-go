@@ -1,1 +1,5 @@
 {{person.name}} <progress value={{person.progress}} max=100></progress>
+
+{{#if hasBlock}}
+  {{yield}}
+{{/if}}

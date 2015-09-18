@@ -6,7 +6,7 @@ const { computed, inject } = Ember;
 export default Ember.Component.extend(RecognizerMixin, {
   /* Setup */
   tagName: 'div',
-  classNames: ['person'],
+  classNames: ['content', 'person'],
   recognizers: 'pan tap', // 'pan press tap',
 
   /* Sevices */

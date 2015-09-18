@@ -1,10 +1,27 @@
 <h3>People</h3>
 {{#each people as |person|}}
-  {{person-item person=person}}
+
+  <div class="list-item {{dash isBulk}}">
+    {{person-item person=person}}
+
+    <div class="bulk">
+      Bulk
+    </div>
+
+    <div class="options">
+      <div>Edit</div>
+      <div>Delete</div>
+    </div>
+  </div>
+
 {{/each}}
 
 
   <br>
+  <br>
+
+  <button {{action (action 'bulk')}}>Edit</button>
+
   <br>
   <br>
 
