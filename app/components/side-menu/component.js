@@ -5,7 +5,7 @@ const { inject } = Ember;
 
 export default Ember.Component.extend(/*RecognizerMixin, */{
  /* Setup */
-  tagName: 'div',
+  tagName: 'nav',
   classNameBindings: [':side-menu', 'isHidden'],
   // recognizers: 'pan', // 'pan press tap',
 

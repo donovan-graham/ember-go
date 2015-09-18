@@ -1,4 +1,84 @@
 
+nav a {
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+nav a.active {
+  background-color: yellow;
+}
+
+
+
+
+.side-menu {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 100%;
+  bottom: 0;
+  padding-right: 40px;
+
+  z-index: 600;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  background-color: #DCF3F9;
+  border: 2px solid #13AFD7;
+  border-right: none;
+
+  tanslate: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+
+.side-menu .menu-toggle{
+  display: block;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: -2px;
+  left: -50px;
+
+  box-sizing: border-box;
+  cursor: pointer;
+
+  background-color: #DCF3F9;
+  border: 2px solid #13AFD7;
+  border-right: none;
+
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  font-size: 30px;
+
+  /*@include transform(translate3d(-54px,0px,0px));*/
+
+  /*@include animation(fadeIn 200ms forwards linear);
+  svg{
+   fill: $black;
+   width: 25px;
+   height: 20px;
+  }
+  &:active{
+    svg{
+      opacity: 0.6;
+    }
+  }
+  &.disabled{
+   color: $grey-light;
+   cursor: default;
+  }
+  &.is-transitioning{
+    opacity: 0;
+    @include animation(none);
+    @include transition(opacity 100ms linear);
+  */}
+}
+
+
+
 
 progress[value] {
   /* Reset the default appearance */
@@ -65,6 +145,34 @@ progress[value]::-webkit-progress-value {
   tanslate: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0);
 }
+
+
+.list-item.is-bulk .content {
+  left: 50px;
+  /* margin-left: 50px; */
+}
+
+
+.list-item .toggle {
+  display: block;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+
+  width: 50px;
+  text-align: center;
+
+  border: 1px solid #333;
+  background-color: white;
+  /* border-right: 1px solid #333; */
+}
+
+.list-item .toggle.is-selected {
+  background-color: green;
+}
+
+
 
 .list-item .options {
   display: block;
@@ -137,72 +245,6 @@ progress[value]::-webkit-progress-value {
 }
 
 
-
-
-.side-menu {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 100%;
-  bottom: 0;
-  padding-right: 40px;
-
-  z-index: 600;
-  box-sizing: border-box;
-  cursor: pointer;
-
-  background-color: #DCF3F9;
-  border: 2px solid #13AFD7;
-  border-right: none;
-
-  tanslate: translate3d(0, 0, 0);
-  -webkit-transform: translate3d(0, 0, 0);
-}
-
-
-.side-menu .menu-toggle{
-  display: block;
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  top: -2px;
-  left: -50px;
-
-  box-sizing: border-box;
-  cursor: pointer;
-
-  background-color: #DCF3F9;
-  border: 2px solid #13AFD7;
-  border-right: none;
-
-  color: white;
-  text-align: center;
-  line-height: 50px;
-  font-size: 30px;
-
-  /*@include transform(translate3d(-54px,0px,0px));*/
-
-  /*@include animation(fadeIn 200ms forwards linear);
-  svg{
-   fill: $black;
-   width: 25px;
-   height: 20px;
-  }
-  &:active{
-    svg{
-      opacity: 0.6;
-    }
-  }
-  &.disabled{
-   color: $grey-light;
-   cursor: default;
-  }
-  &.is-transitioning{
-    opacity: 0;
-    @include animation(none);
-    @include transition(opacity 100ms linear);
-  */}
-}
 
 
 

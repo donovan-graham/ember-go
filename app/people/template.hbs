@@ -1,32 +1,22 @@
 <h3>People</h3>
+<button {{action (action 'bulk')}}>Edit</button> [{{isBulk}}]
+<br>
+<br>
+
 {{#each people as |person|}}
 
-  <div class="list-item {{dash isBulk}}">
+  <div class="list-item {{to-dash isBulk}}">
     {{person-item person=person}}
 
-    <div class="bulk">
-      Bulk
-    </div>
+    {{bulk-toggle item=person selected=selected on-click=(action 'toggle' person) }}
 
     <div class="options">
-      <div>Edit</div>
-      <div>Delete</div>
+      <div {{action (action 'edit' person)}}>Edit</div>
+      <div {{action (action 'delete' person)}}>Delete</div>
     </div>
   </div>
 
 {{/each}}
-
-
-  <br>
-  <br>
-
-  <button {{action (action 'bulk')}}>Edit</button>
-
-  <br>
-  <br>
-
-  {{link-to 'contact' 'contact'}}
-
 
 {{#ember-wormhole to="plus-button"}}
   {{plus-button}}
