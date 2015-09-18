@@ -15,3 +15,8 @@
 /libpeerconnection.log
 npm-debug.log
 testem.log
+
+
+# cordova builds
+**/cordova/platforms
+**/cordova/plugins

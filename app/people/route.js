@@ -2,23 +2,29 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
-  setupController(controller/*, model*/) {
-    this._super(controller, null);
+  firstLoad: true,
 
-    let names, people, i=0;
-    names = ['John', 'Donovan', 'Graeme', 'Jason', 'Michiel', 'Monde'];
-    people = [];
-
-    while (i < 100) {
-      i++;
-      people.push(Ember.Object.create({
-          id: i,
-          name: names[i % names.length] + " " + i,
-          progress: Math.round(Math.random() * 100)
-        }));
+  beforeModel() {
+    if (this.get('firstLoad')) {
+      let names = ['John', 'Donovan', 'Graeme', 'Jason', 'Michiel', 'Monde'];
+      let i=0;
+      while (i < 100) {
+        i++;
+        this.store.createRecord('person', {
+            name: names[i % names.length] + " " + i,
+            progress: Math.round(Math.random() * 100)
+          });
+      }
+      this.set('firstLoad', false);
     }
+  },
 
+  model() {
+    return this.store.peekAll('person');
+  },
 
-    controller.set('people', people);
+  setupController(controller, model) {
+    this._super(controller, null);
+    controller.set('people', model);
   }
 });

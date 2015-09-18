@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
       let bool = this.get('isBulk');
 
       if (bool) {
-        this.get('ui').disown(this.toString())
+        this.get('ui').disown(this.toString());
       } else {
         this.get('ui').own(this.toString(), this.close.bind(this));
       }
@@ -45,19 +45,19 @@ export default Ember.Controller.extend({
       }
     },
 
-    pin(person) {
+    pin(/* person */) {
       console.log("pin person");
     },
 
-    view(person) {
+    view(/* person */) {
       console.log("view person");
     },
 
-    edit(person) {
+    edit(/* person */) {
       console.log("edit person");
     },
 
-    delete(person) {
+    delete(/* person */) {
       console.log("delete person");
     },
   }

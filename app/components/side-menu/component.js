@@ -3,6 +3,9 @@ import RecognizerMixin from 'ember-gestures/mixins/recognizers';
 
 const { inject, computed } = Ember;
 
+let screenWidth  = window.innerWidth  || document.body.clientWidth;
+
+
 export default Ember.Component.extend(RecognizerMixin, {
  /* Setup */
   tagName: 'nav',
@@ -13,12 +16,22 @@ export default Ember.Component.extend(RecognizerMixin, {
   ui: inject.service('ui'),
 
   /* Public */
-  revealWidth: 400,
+  width: 300,
 
   /* Private */
   isOpen: false,
 
-  clipPoint: 80,
+  revealWidth: computed('width', function() {
+    if (screenWidth && screenWidth > 0) {
+      return Math.min(this.get('width'), screenWidth - 50); // -50px for side menu toggle button
+    } else {
+      return this.get('width');
+    }
+  }),
+
+  clipPoint: computed('revealWidth', function() {
+    return Math.floor(this.get('revealWidth') * 0.2);
+  }),
 
   rafMove: null,
   rafAnimate: null,
