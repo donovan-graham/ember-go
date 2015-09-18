@@ -184,15 +184,25 @@ progress[value]::-webkit-progress-value {
   border: 1px solid #333;
   border-left: none;
 
+  box-sizing: border-box;
+
+
   /* border-right: 1px solid #333; */
 }
 
 .list-item .options div {
   display: inline-block;
   border-left: 1px solid #444;
+
+  float: left;
+
+  box-sizing: border-box;
+  cursor: pointer;
+
   width: 50px;
   height: 100%;
   text-align: center;
+  overflow: hidden;
 }
 
 

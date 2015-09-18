@@ -45,6 +45,14 @@ export default Ember.Controller.extend({
       }
     },
 
+    pin(person) {
+      console.log("pin person");
+    },
+
+    view(person) {
+      console.log("view person");
+    },
+
     edit(person) {
       console.log("edit person");
     },

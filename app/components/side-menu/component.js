@@ -1,13 +1,13 @@
 import Ember from 'ember';
-// import RecognizerMixin from 'ember-gestures/mixins/recognizers';
+import RecognizerMixin from 'ember-gestures/mixins/recognizers';
 
-const { inject } = Ember;
+const { inject, computed } = Ember;
 
-export default Ember.Component.extend(/*RecognizerMixin, */{
+export default Ember.Component.extend(RecognizerMixin, {
  /* Setup */
   tagName: 'nav',
   classNameBindings: [':side-menu', 'isHidden'],
-  // recognizers: 'pan', // 'pan press tap',
+  recognizers: 'pan',
 
   /* Sevices */
   ui: inject.service('ui'),
@@ -18,103 +18,95 @@ export default Ember.Component.extend(/*RecognizerMixin, */{
   /* Private */
   isOpen: false,
 
-  // clipPoint: computed('revealWidth', function() {
-  //   return Math.floor(this.get('revealWidth') * 0.4);
-  // }),
+  clipPoint: 80,
 
   rafMove: null,
   rafAnimate: null,
 
-  // startX: 0,
-  // lastX: 0,
-  // startY: 0,
-  // startZ: 0,
+  startX: 0,
+  lastX: 0,
+  startY: 0,
+  startZ: 0,
 
 
-  // /* Events */
+  /* Events */
 
-  // panStart() {
-  //   this.get('ui').own(this.get('elementId'), this.close.bind(this));
+  panStart() {
+    this.get('ui').own(this.get('elementId'), this.close.bind(this));
 
-  //   let style = window.getComputedStyle(this.$()[0]);
-  //   let matrix = new WebKitCSSMatrix(style.webkitTransform);
-  //   this.startX = matrix.m41;
-  //   this.startY = matrix.m42;
-  //   this.startZ = matrix.m43;
+    let style = window.getComputedStyle(this.$()[0]);
+    let matrix = new WebKitCSSMatrix(style.webkitTransform);
+    this.startX = matrix.m41;
+    this.startY = matrix.m42;
+    this.startZ = matrix.m43;
 
-  //   if (!Ember.testing) {
-  //     this.lastX = this.startX;
-  //   }
+    if (!Ember.testing) {
+      this.lastX = this.startX;
+    }
 
-  //   window.cancelAnimationFrame(this.rafAnimate);
-  //   this.rafAnimate = null;
-  // },
+    window.cancelAnimationFrame(this.rafAnimate);
+    this.rafAnimate = null;
+  },
 
-  // panMove(e) {
-  //   let x = Math.round(this.startX +  e.originalEvent.gesture.deltaX);
-  //   x = Math.min(0, Math.max(-1 * this.get('revealWidth'), x));
+  panMove(e) {
+    let x = Math.round(this.startX +  e.originalEvent.gesture.deltaX);
+    x = Math.min(0, Math.max(-1 * this.get('revealWidth'), x));
 
-  //   if (this.lastX === x) {
-  //     return;
-  //   }
+    if (this.lastX === x) {
+      return;
+    }
 
-  //   this.lastX = x;
-  //   if (!this.rafMove) {
-  //     this.rafMove = window.requestAnimationFrame(this.move.bind(this));
-  //   }
-  // },
+    this.lastX = x;
+    if (!this.rafMove) {
+      this.rafMove = window.requestAnimationFrame(this.move.bind(this));
+    }
+  },
 
-  // panEnd(e) {
-  //   if (Math.abs(e.originalEvent.gesture.deltaX) >= this.get('clipPoint')) {
-  //     this.toggleProperty('isOpen');
-  //   }
+  panEnd(e) {
+    if (Math.abs(e.originalEvent.gesture.deltaX) >= this.get('clipPoint')) {
+      this.toggleProperty('isOpen');
+    }
 
-  //   if (!this.get('isOpen')) {
-  //     this.get('ui').disown(this.get('elementId'));
-  //   }
+    if (!this.get('isOpen')) {
+      this.get('ui').disown(this.get('elementId'));
+    }
 
-  //   window.cancelAnimationFrame(this.rafMove);
-  //   this.rafMove = null;
+    window.cancelAnimationFrame(this.rafMove);
+    this.rafMove = null;
 
-  //   if (!this.rafAnimate) {
-  //     this.rafAnimate = window.requestAnimationFrame(this.animate.bind(this));
-  //   }
-  // },
+    if (!this.rafAnimate) {
+      this.rafAnimate = window.requestAnimationFrame(this.animate.bind(this));
+    }
+  },
 
-  // // click() {
-  // //   // Don't know if this is a GhostBuster issue, but it's being called after panEnd...
-  // //   console.log('click');
-  // //   return;
-  // // },
+  move() {
+    this.rafMove = null;
 
-  // move() {
-  //   this.rafMove = null;
+    let x = this.lastX,
+        y = this.startY,
+        z = this.startZ,
+        style = '';
 
-  //   let x = this.lastX,
-  //       y = this.startY,
-  //       z = this.startZ,
-  //       style = '';
+    // keep original inline style
+    style += 'touch-action: pan-x;';
+    style += '-webkit-user-select: none;';
+    style += '-webkit-user-drag: none;';
 
-  //   // keep original inline style
-  //   style += 'touch-action: pan-x;';
-  //   style += '-webkit-user-select: none;';
-  //   style += '-webkit-user-drag: none;';
+    // clear animation
+    style += '-webkit-transition: none; ';
+    style += '-moz-transition: none; ';
+    style += '-ms-transition: none; ';
+    style += '-o-transition: none; ';
+    style += 'transition: none; ';
 
-  //   // clear animation
-  //   style += '-webkit-transition: none; ';
-  //   style += '-moz-transition: none; ';
-  //   style += '-ms-transition: none; ';
-  //   style += '-o-transition: none; ';
-  //   style += 'transition: none; ';
+    style += '-webkit-transform: translate3d(' + x + 'px,' + y + 'px,' + z + 'px) scale3d(1,1,1); ';
+    style += '-moz-transform: translate3d(' + x + 'px,' + y + 'px,' + z + 'px); ';
+    style += '-ms-transform: translate3d(' + x + 'px,' + y + 'px,' + z + 'px); ';
+    style += '-o-transform: translate3d(' + x + 'px,' + y + 'px,' + z + 'px); ';
+    style += 'transform: translate3d(' + x + 'px,' + y + 'px,' + z + 'px); ';
 
-  //   style += '-webkit-transform: translate3d(' + x + 'px,' + y + 'px,' + z + 'px) scale3d(1,1,1); ';
-  //   style += '-moz-transform: translate3d(' + x + 'px,' + y + 'px,' + z + 'px); ';
-  //   style += '-ms-transform: translate3d(' + x + 'px,' + y + 'px,' + z + 'px); ';
-  //   style += '-o-transform: translate3d(' + x + 'px,' + y + 'px,' + z + 'px); ';
-  //   style += 'transform: translate3d(' + x + 'px,' + y + 'px,' + z + 'px); ';
-
-  //   this.$()[0].style.cssText = style;
-  // },
+    this.$()[0].style.cssText = style;
+  },
 
   animate() {
     this.rafAnimate = null;
@@ -172,7 +164,6 @@ export default Ember.Component.extend(/*RecognizerMixin, */{
 
   actions: {
     toggle() {
-
      if (this.get('isOpen')) {
         this.set('isOpen', false);
         this.get('ui').disown(this.get('elementId'));
@@ -188,12 +179,6 @@ export default Ember.Component.extend(/*RecognizerMixin, */{
         this.rafAnimate = window.requestAnimationFrame(this.animate.bind(this));
       }
     },
-
-    testAction() {
-      console.log('test');
-      return false;
-    }
-
   }
 
 });

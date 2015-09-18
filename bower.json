@@ -12,10 +12,7 @@
     "jquery": "^1.11.1",
     "loader.js": "ember-cli/loader.js#3.2.0",
     "qunit": "~1.17.1",
-    "hammer-time": "0.2.2"
-  },
-  "devDependencies": {
-    "hammerjs": "runspired/hammer.js#develop",
-    "hammer-time": "0.2.2"
+    "hammer-time": "0.3.0",
+    "hammerjs": "runspired/hammer.js#develop"
   }
 }

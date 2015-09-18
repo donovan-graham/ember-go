@@ -11,6 +11,8 @@
     {{bulk-toggle item=person selected=selected on-click=(action 'toggle' person) }}
 
     <div class="options">
+      <div {{action (action 'view' person)}}>View</div>
+      <div {{action (action 'pin' person)}}>Pin</div>
       <div {{action (action 'edit' person)}}>Edit</div>
       <div {{action (action 'delete' person)}}>Delete</div>
     </div>
