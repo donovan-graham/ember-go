@@ -20,6 +20,13 @@
 
 {{/each}}
 
+
+
 {{#ember-wormhole to="plus-button"}}
-  {{plus-button}}
+  {{#plus-button}}
+    <i class="item" {{action (action 'one')}}><i class="title">One</i></i>
+    <i class="item" {{action (action 'two')}}><i class="title">Two</i></i>
+    <i class="item" {{action (action 'three')}}><i class="title">Three</i></i>
+  {{/plus-button}}
 {{/ember-wormhole}}
+

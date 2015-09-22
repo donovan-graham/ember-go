@@ -45,6 +45,8 @@ export default Ember.Controller.extend({
       }
     },
 
+
+    // list-item actions
     pin(/* person */) {
       console.log("pin person");
     },
@@ -60,5 +62,23 @@ export default Ember.Controller.extend({
     delete(/* person */) {
       console.log("delete person");
     },
+
+
+    // plus-button actions
+    one() {
+      console.log("plus one");
+      this.get('ui').play(); // not necessary if transitioning
+    },
+
+    two() {
+      console.log("plus two");
+      this.get('ui').play(); // not necessary if transitioning
+    },
+
+    three() {
+      console.log("plus three");
+      this.get('ui').play(); // not necessary if transitioning
+    },
+
   }
 });

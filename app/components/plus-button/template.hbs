@@ -1,9 +1,16 @@
-<div class="toggle">
-  <i class="is-closed">+</i>
+<div class="toggle" {{action 'toggle'}}>
+  <i>{{#if isOpen}}-{{else}}+{{/if}}</i>
 </div>
 
 <div class="pulses">
   <i class="one"></i>
   <i class="two"></i>
   <i class="three"></i>
+</div>
+
+
+<div class="options">
+  {{#if hasBlock}}
+    {{yield}}
+  {{/if}}
 </div>
