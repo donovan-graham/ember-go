@@ -1,15 +1,23 @@
 import Ember from 'ember';
 
-const { inject } = Ember;
+const { inject, computed } = Ember;
 
 export default Ember.Controller.extend({
 
   ui: inject.service(),
 
-  enableFilter: false,
+  people: [],
+
+  sortedPeople: computed.sort('people', 'sorting'),
 
   isBulk: false,
   selected: [],
+
+  sorting: ['id:asc'],
+
+  sortId: ['id:asc'], // this is not numerically correct, it outputs [1, 10, 100, 1000, 101, 102 , ...]
+  sortName: ['name:asc'],
+  sortProgress: ['progress:desc'],
 
 
   close() {
@@ -45,6 +53,13 @@ export default Ember.Controller.extend({
       }
     },
 
+    // header menu actions
+    sort(sortProperties) {
+      this.get('ui').play(); // not necessary if transitioning
+      this.set('sorting', sortProperties);
+    },
+
+
 
     // list-item actions
     pin(/* person */) {
@@ -66,18 +81,18 @@ export default Ember.Controller.extend({
 
     // plus-button actions
     one() {
-      console.log("plus one");
       this.get('ui').play(); // not necessary if transitioning
+      console.log("plus one");
     },
 
     two() {
-      console.log("plus two");
       this.get('ui').play(); // not necessary if transitioning
+      console.log("plus two");
     },
 
     three() {
-      console.log("plus three");
       this.get('ui').play(); // not necessary if transitioning
+      console.log("plus three");
     },
 
   }

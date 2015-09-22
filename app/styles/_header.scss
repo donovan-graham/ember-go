@@ -8,3 +8,45 @@
   background-color: $white;
   border-bottom: 2px solid $grey-light;
 }
+
+
+.header-menu {
+
+  h1 {
+    width: 100%;
+    text-align: center;
+
+    &:after {
+      font-size: 14px;
+      content: "↓";
+    }
+  }
+
+  .options {
+    display: none;
+    background-color: $white;
+    position: absolute;
+    top: 60px;
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 10px;
+
+    border-top: 1px solid $grey-light;
+    border-bottom: 2px solid $grey-light;
+  }
+
+  &.is-open {
+    h1{
+      &:after {
+        font-size: 14px;
+        content: "↑";
+      }
+    }
+
+    .options {
+      display: block;
+    }
+  }
+}

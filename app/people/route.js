@@ -8,9 +8,10 @@ export default Ember.Route.extend({
     if (this.get('firstLoad')) {
       let names = ['John', 'Donovan', 'Graeme', 'Jason', 'Michiel', 'Monde'];
       let i=0;
-      while (i < 1000) {
+      while (i < 100) {
         i++;
         this.store.createRecord('person', {
+            id: i,
             name: names[i % names.length] + " " + i,
             progress: Math.round(Math.random() * 100)
           });

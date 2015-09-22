@@ -2,7 +2,7 @@
 <br>
 <br>
 
-{{#each people as |person|}}
+{{#each sortedPeople as |person|}}
 
   <div class="list-item {{to-dash isBulk}}">
     {{person-item person=person}}
@@ -20,10 +20,14 @@
 {{/each}}
 
 
-
-
 {{#ember-wormhole to="header"}}
-  <h1>People list</h1>
+
+  {{#header-menu title="People list" itemCount=3}}
+      <div class="item" {{action (action 'sort' sortId)}}>Sort by id</div>
+      <div class="item" {{action (action 'sort' sortName)}}>Sort by name</div>
+      <div class="item" {{action (action 'sort' sortProgress)}}>Sort by progress</div>
+  {{/header-menu}}
+
 {{/ember-wormhole}}
 
 {{#ember-wormhole to="plus-button"}}
