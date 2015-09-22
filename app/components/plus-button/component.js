@@ -3,11 +3,32 @@ import Ember from 'ember';
 const { computed, inject } = Ember;
 
 export default Ember.Component.extend({
-  classNameBindings: [':plus-button', ':three', 'isHidden', 'isOpen'],
+  classNameBindings: [':plus-button', 'itemClass', 'isHidden', 'isOpen'],
 
   ui: inject.service(),
 
+  itemCount: 0,
+
   isOpen: false,
+
+  itemClass: computed('itemCount', function() {
+    let count = this.get('itemCount');
+
+    switch(count) {
+      case 1:
+        return 'one';
+      case 2:
+        return 'two';
+      case 3:
+        return 'three';
+      case 4:
+        return 'four';
+      case 5:
+        return 'five';
+      default:
+        return null;
+    }
+  }),
 
   isHidden: computed('ui.activeElementId', 'elementId', function() {
     return (this.get('ui.activeElementId') && this.get('ui.activeElementId') !== this.get('elementId'));
