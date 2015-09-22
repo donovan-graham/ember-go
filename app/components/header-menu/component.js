@@ -23,6 +23,10 @@ export default Ember.Component.extend({
         return;
       }
 
+      if (this.get('itemCount') === 0) {
+        return;
+      }
+
       if (this.get('isOpen')) {
         this.get('ui').disown(this.get('elementId'));
       } else {

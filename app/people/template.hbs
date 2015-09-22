@@ -21,13 +21,11 @@
 
 
 {{#ember-wormhole to="header"}}
-
   {{#header-menu title="People list" itemCount=3}}
       <div class="item" {{action (action 'sort' sortId)}}>Sort by id</div>
       <div class="item" {{action (action 'sort' sortName)}}>Sort by name</div>
       <div class="item" {{action (action 'sort' sortProgress)}}>Sort by progress</div>
   {{/header-menu}}
-
 {{/ember-wormhole}}
 
 {{#ember-wormhole to="plus-button"}}
