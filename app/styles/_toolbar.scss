@@ -1,0 +1,81 @@
+.list-toolbar {
+  z-index: $zindex-toolbar;
+
+  margin-top: -10px; /* offset the container padding */
+  display: block;
+  position: relative;
+
+  box-sizing: border-box;
+  height: 40px;
+
+  margin-bottom: 10px;
+
+
+  .content {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-color: $grey-white;
+
+
+    box-sizing: border-box;
+    border-bottom: 1px solid $grey-light;
+    margin: 0;
+    padding: 8px 0;
+
+
+
+    .drop, .search, .edit {
+      display: inline-block;
+      float: left;
+      text-align: center;
+    }
+
+    .drop, .edit {
+      width: 10%;
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .search {
+      width: 80%;
+
+      input[type=search] {
+        width: 100%;
+        font-size: 24px;
+      }
+    }
+
+  }
+
+  .options {
+    background-color: $blue-very-light;
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    width: 100%;
+
+    box-sizing: border-box;
+    padding: 10px;
+    border-bottom: 1px solid $grey-light;
+  }
+
+
+  &.is-open {
+    .options {
+      top: 40px;
+      bottom: auto;
+    }
+  }
+
+
+}
+
+.clear-fix {
+  display: block;
+  clear: both;
+}

@@ -1,11 +1,13 @@
 <div id="header"></div>
 
-<nav>
-  {{link-to 'people' 'people'}} | {{link-to 'contact' 'contact'}}
-</nav>
-
 <div id="container">
-{{outlet}}
+  {{outlet}}
+
+  <br><br>
+  <nav>
+    {{link-to 'people' 'people'}} | {{link-to 'contact' 'contact'}}
+  </nav>
+
 </div>
 
 {{side-menu}}

@@ -1,6 +1,25 @@
-<button {{action (action 'bulk')}}>Edit</button> [{{isBulk}}]
-<br>
-<br>
+{{#list-toolbar as |toolbar|}}
+    <div class="content">
+      <div class="drop">
+        <div {{action 'toggle' target=toolbar}}>{{partial 'svgs/icon-sort'}}</div>
+      </div>
+
+      <div class="search {{if isSearchOpen 'is-open'}}">
+        <input type="search" />
+      </div>
+
+      <div class="edit">
+        <div {{action (action 'bulk')}}>{{partial 'svgs/icon-edit'}}</div>
+      </div>
+    </div>
+
+    <div class="options">
+      <div class="item" {{action (action 'sort' sortId)}}>Sort by id</div>
+      <div class="item" {{action (action 'sort' sortName)}}>Sort by name</div>
+      <div class="item" {{action (action 'sort' sortProgress)}}>Sort by progress</div>
+    </div>
+{{/list-toolbar}}
+
 
 {{#each sortedPeople as |person|}}
 
@@ -20,13 +39,15 @@
 {{/each}}
 
 
+
 {{#ember-wormhole to="header"}}
   {{#header-menu title="People list" itemCount=3}}
-      <div class="item" {{action (action 'sort' sortId)}}>Sort by id</div>
-      <div class="item" {{action (action 'sort' sortName)}}>Sort by name</div>
-      <div class="item" {{action (action 'sort' sortProgress)}}>Sort by progress</div>
+      <div class="item" {{action (action 'sort' sortId)}}>Order on id</div>
+      <div class="item" {{action (action 'sort' sortName)}}>Order on name</div>
+      <div class="item" {{action (action 'sort' sortProgress)}}>Order on progress</div>
   {{/header-menu}}
 {{/ember-wormhole}}
+
 
 {{#ember-wormhole to="plus-button"}}
   {{#plus-button itemCount=3}}

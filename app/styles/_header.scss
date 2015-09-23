@@ -5,15 +5,24 @@
   left: 0;
   right: 0;
   height: 60px;
-  background-color: $white;
-  border-bottom: 2px solid $grey-light;
 }
 
 
 .header-menu {
 
   h1 {
+    z-index: 1;
+    position: absolute;
     width: 100%;
+    height: 100%;
+    background-color: $white;
+
+
+    box-sizing: border-box;
+    border-bottom: 1px solid $grey-light;
+
+    margin: 0;
+    padding: 0;
     text-align: center;
 
     &:after {
@@ -23,18 +32,17 @@
   }
 
   .options {
-    display: none;
-    background-color: $white;
+    // display: none;
+    background-color: $blue-light;
     position: absolute;
-    top: 60px;
     width: 100%;
 
+    top: auto;
+    bottom: 0px;
+
     box-sizing: border-box;
-
     padding: 10px;
-
-    border-top: 1px solid $grey-light;
-    border-bottom: 2px solid $grey-light;
+    border-bottom: 1px solid $grey-light;
   }
 
   &.is-open {
@@ -46,7 +54,8 @@
     }
 
     .options {
-      display: block;
+      top: 60px;
+      bottom: auto;
     }
   }
 }
